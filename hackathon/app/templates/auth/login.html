@@ -1,0 +1,23 @@
+{% extends 'layout.html' %}
+
+{% block title %}Log In{% endblock %}
+
+{% block header %}
+  <h1 class="text-center"><i class="fa-solid fa-wand-sparkles fa-lg" style="color: #2c58ce;"></i> Welcome to your mental health matters!</h1>
+{% endblock %}
+
+{% block content %}
+  <form method="post" class="mt-4">
+    {{ form.hidden_tag() }} <!-- CSRF Token -->
+    <div class="mb-3">
+      <label for="username" class="form-label">Username</label>
+      <input name="username" id="username" class="form-control" required>
+    </div>
+    <div class="mb-3">
+      <label for="password" class="form-label">Password</label>
+      <input type="password" name="password" id="password" class="form-control" required>
+    </div>
+    <button type="submit" class="btn btn-success">Log In</button>
+    <a href="{{ url_for('auth.register') }}" class="btn btn-secondary">Create new Account</a>
+  </form>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends 'layout.html'%}
+
+{% block header %}
+  <h1 class="text-center">{% block title %}Notice Board{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+    {% if g.user.is_admin %}
+    <a href="{{ url_for('notice.create_notice') }}" class="btn btn-primary mt-3">Create New Notice</a>
+    {% endif %}
+    <hr>
+    {% for notice in notices %}
+        <article>
+            <div>
+                <h3><b>{{notice.title}} on {{ notice.created_at.strftime("%Y-%m-%d") }}</b></h3>
+                <p>{{notice.content}}</p>
+            </div>
+                
+            <a href="{{ url_for('notice.edit_notice', id=notice.id) }}" class="btn btn-warning btn-sm">Edit</a>
+            <form onsubmit="return confirm('Your notice will be deleted!');" action="{{ url_for('notice.delete_notice', id=notice.id) }}" method="POST" style="display:inline-block;">
+                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+            </form>
+        </article>
+    {% endfor %}
+{% endblock %}

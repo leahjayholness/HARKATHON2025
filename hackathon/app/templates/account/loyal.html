@@ -1,0 +1,30 @@
+{% extends 'layout.html' %}
+
+{% block header %}
+  <h1 class="text-center">{% block title %} <i class="fa-solid fa-gift fa-lg" style="color: #2c58ce;"></i> Better Mental Health Points{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+
+<p class="loyal-intro"></i>Every <strong> Completed Appointment </strong> made will earn you <strong> 5 points</strong></p>
+
+<ul class="loyal-introlist"><strong class="list-top">Possible Rewards</strong>
+    <li> <strong> 50 Points</strong> gives you <strong> A Self Care gift Basket! </strong></li>
+    <li> <strong>100 Points or More</strong> gives you <strong> A full body massage!</strong></li>
+    <li> <strong>200 Points or More</strong> gives you <strong> A day pass to the RIO Hotel! </strong></li>
+    <li> <strong>400 Points</strong> gives you <strong>A ticket to our Annual Mental Health Retreat in The Bahamas!</strong></li>
+</ul> 
+
+<p class="your-prog"> <i class="fa-solid fa-person" style="color: #2c58ce;"></i> Your Progress</p>
+
+<div class="prog-info"> 
+    <p>
+    <i class="fa-solid fa-circle-user" style="color: #000000;"> </i> Customer : {{g.user['name']}}
+    <br> 
+    <i class="fa-solid fa-gift" style="color: #000000;"> </i> Number of Points Earned: {{g.user['points']}}
+    </p>
+</div>
+
+
+
+{% endblock %}

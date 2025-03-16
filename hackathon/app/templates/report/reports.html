@@ -1,0 +1,22 @@
+{% extends 'layout.html'%}
+
+{% block header %}
+  <h1 class="text-center">{% block title %}Reports{% endblock %}</h1>
+{% endblock %}
+<hr>
+{% block content %}
+    <a href="{{ url_for('report.create_report') }}" class="btn btn-primary mt-3">Create New Report</a>
+    {% for report in reports %}
+        <article>
+            <div>
+                <h3><b>{{report.title}} on {{ report.created_at.strftime("%Y-%m-%d") }}</b></h3>
+                <p>{{report.content}}</p>
+            </div>
+                
+            <a href="{{ url_for('report.edit_report', id=report.id) }}" class="btn btn-warning btn-sm">Edit</a>
+            <form onsubmit="return confirm('Your report will be deleted!');" action="{{ url_for('report.delete_report', id=report.id) }}" method="POST" style="display:inline-block;">
+                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+            </form>
+        </article>
+    {% endfor %}
+{% endblock %}

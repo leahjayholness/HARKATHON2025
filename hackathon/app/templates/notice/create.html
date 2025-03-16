@@ -1,0 +1,36 @@
+{% extends 'layout.html'%}
+
+{% block header %}
+  <h1 class="text-center">{% block title %}Create Notice{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+<form action="" method="POST" class="mt-4">
+  <div class="mb-3">
+    <label for="title" class="form-label">Title</label>
+    <input type="text" id="title" name="title" class="form-control" required>
+  </div>
+  <div class="mb-3">
+    <label for="content" class="form-label">Content</label>
+    <input type="text" id="content" name ="content" class="form-control" required>
+  </div>
+  <button type="submit" class="btn btn-success confirm-submit">Create</button>
+  <a href="{{ url_for('homepage.index') }}" class="btn btn-secondary">Cancel</a>
+</form>
+
+<div id="confirmationModal">
+  <div class="modal-content">
+    <h4 class="text-center">Confirm Your Action</h4>
+    <p class="text-center">Are you sure you want to proceed with this action?</p>
+    <div class="modal-buttons">
+      <button id="modalConfirm" class="btn btn-success">Yes</button>
+      <button id="modalCancel" class="btn btn-danger">Cancel</button>
+    </div>
+  </div>
+</div>
+    <form method = "post">
+        
+
+        
+    </form>
+{% endblock %}

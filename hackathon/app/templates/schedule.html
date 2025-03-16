@@ -1,0 +1,65 @@
+{% extends 'layout.html' %}
+
+{% block title %}Schedule{% endblock %}
+
+{% block header %}
+    <h1 class="text-center"><i class="fa-solid fa-pen-nib fa-lg" style="color: #2c58ce;"></i> Appointments Schedule</h1>
+{% endblock %}
+
+{% block content %}
+    <table class="table table-bordered mt-4">
+        <thead class="table-dark">
+            <tr id="appointment-row">
+                <th><i class="fa-solid fa-users" style="color: #ffffff;"></i></th>
+                <th>Name</th>
+                <th>Start Time</th>
+                <th>End Time</th>
+                <th>Cognitive Behavioral Therapy (CBT)</th>
+                <th>Dialectical Behavior Therapy (DBT)</th>
+                <th>Completed</th>
+                <th>Remaining Time</th>
+                <th><i class="fa-solid fa-pen" style="color: #ffffff;"></i></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for appointment in appointments %}
+            <tr id="appointment-row-else">
+                <td>{{ loop.index }}</td>
+                <td>{{ appointment.account.name }}</td>
+                <td>{{ appointment.start_time.strftime('%I:%M %p') }}</td>
+                <td>{{ appointment.end_time.strftime('%I:%M %p') }}</td>
+                <td>{{ appointment.washes }}</td>
+                <td>{{ appointment.dries }}</td>
+                <td>{{ 'Yes' if appointment.completed else 'No' }}</td>
+                <td>
+                    <span 
+                        class="remaining-time"
+                        data-end-time="{{ appointment.end_time.strftime('%Y-%m-%dT%H:%M:%S') }}"
+                        data-start-time="{{ appointment.start_time.strftime('%Y-%m-%dT%H:%M:%S') }}">
+                    </span>
+                </td>
+                <td>
+                    {% if session.get('user_id') == appointment.account_id %}
+                    <a href="{{ url_for('appointment.edit_appointment', id=appointment.id) }}" class="btn btn-warning btn-sm" style="display:inline-block; margin: 5%;">Edit</a> 
+                    <form onsubmit="return confirm('Your appointment will be deleted!');" action="{{ url_for('appointment.delete_appointment', id=appointment.id) }}" method="POST" style="display:inline-block;">
+                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                    </form>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>        
+    </table>
+    <a href="{{ url_for('appointment.create_appointment') }}" class="btn btn-primary mt-3">Create New Appointment</a> 
+
+    <div id="confirmationModal">
+        <div class="modal-content">
+            <h4 class="text-center">Session Completed</h4>
+            <p class="text-center">Continue</p>
+            <div class="modal-buttons">
+                <button id="modalConfirm" class="btn btn-success">Yes</button>
+            </div>
+        </div>
+    </div>
+    
+{% endblock %}

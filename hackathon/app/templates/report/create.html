@@ -1,0 +1,40 @@
+{% extends 'layout.html'%}
+
+{% block header %}
+  <h1 class="text-center">{% block title %}Report Portal{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+  <form action="" method="POST" class="mt-4">
+    <div class="mb-3">
+      <label for="issue" class="form-label">Issue</label>
+      <select class="form-control" name="issue" id="issue">
+        <option value="" selected disabled hidden>--Select--</option>
+        <option value="Staff">Mental Health Professional</option>
+        <option value="App Functionality">App Funcionality</option>
+        <option value="Others">Others</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label for = "message" class="form-label"><b>Report Message</b></label>
+      <input type = "text" id = "message" name = "message" class="form-control" required>
+    </div>
+    <div class="mb-3">
+      <input type = "radio" id = "disclaimer" name = "disclaimer" required>
+      <label for = "disclaimer" class="form-label">I have read through my report and deemed it to be truthful.</label>
+    </div>
+    <button type="submit" class="btn btn-success confirm-submit">Submit Report</button>
+    <a href="{{ url_for('homepage.index') }}" class="btn btn-secondary">Cancel</a>
+  </form>
+
+  <div id="confirmationModal">
+    <div class="modal-content">
+      <h4 class="text-center">Confirm Your Action</h4>
+      <p class="text-center">Are you sure you want to proceed with this action?</p>
+      <div class="modal-buttons">
+        <button id="modalConfirm" class="btn btn-success">Yes</button>
+        <button id="modalCancel" class="btn btn-danger">Cancel</button>
+      </div>
+    </div>
+  </div>
+{% endblock %}
